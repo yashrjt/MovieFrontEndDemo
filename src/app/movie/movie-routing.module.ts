@@ -9,8 +9,8 @@ import { ListMovieComponent } from './list-movie/list-movie.component';
 const routes: Routes = [
   {path:'',component:ShellMovieComponent,
    children:[
-        {path:'movies/add',component:AddMovieComponent},
-        {path:'movies/viewall',component:ListMovieComponent}
+        {path:'add',component:AddMovieComponent},
+        {path:'viewall',component:ListMovieComponent}
     ]
 }
   
