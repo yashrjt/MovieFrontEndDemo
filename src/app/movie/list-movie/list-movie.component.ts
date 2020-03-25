@@ -10,7 +10,7 @@ import {Movie}  from '../movie';
 export class ListMovieComponent implements OnInit {
 
   constructor(private list:ListmovieService) { }
-  moviesList=[];
+  moviesList;
   ngOnInit() {
     this.list.getAllMovies().subscribe((res)=>{
     console.log("ListMovieComponent -> ngOnInit -> res", res)
