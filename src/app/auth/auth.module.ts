@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { LoginGuard } from './login.guard';
 import {ReactiveFormsModule, FormsModule}  from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JWTInterceptor } from './interceptors/jwt.interceptor';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  exports:[LoginComponent]
-  // providers:[LoginGuard]
+  exports:[LoginComponent],
+   providers:[{provide:HTTP_INTERCEPTORS,useClass:JWTInterceptor,multi:true}]
 })
 export class AuthModule { }

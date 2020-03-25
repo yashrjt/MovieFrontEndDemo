@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ListmovieService}  from '../services/listmovie.service';
+import {Movie}  from '../movie';
 
 @Component({
   selector: 'app-list-movie',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListMovieComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private list:ListmovieService) { }
+  moviesList=[];
   ngOnInit() {
+    this.list.getAllMovies().subscribe((res)=>{
+    console.log("ListMovieComponent -> ngOnInit -> res", res)
+      this.moviesList=res;
+    },
+    (err)=>{
+    console.log("ListMovieComponent -> ngOnInit -> err", err)
+      
+    })
   }
 
 }

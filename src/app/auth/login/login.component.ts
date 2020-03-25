@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit,OnDestroy {
   loginForm:FormGroup;
   
 
-  constructor(private fb:FormBuilder,private auth:AuthService) { }
+  constructor(private fb:FormBuilder,private auth:AuthService,private router:Router) { }
 
   ngOnInit() {
     console.log('Login comp initilaised');
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit,OnDestroy {
       
     });
     this.loginForm.reset();
+    this.router.navigate(['/home']);
   }
   ngOnDestroy(){
     console.log('Login comp destroyed');

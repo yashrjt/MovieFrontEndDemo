@@ -10,14 +10,14 @@ export class LoginGuard implements CanActivate {
   constructor(private router:Router){
 
   }
-  loggedIn:boolean=true;
+
   canActivate(router:ActivatedRouteSnapshot,state:RouterStateSnapshot){
      
       return this.isUserLoggedIn();
   }
 
   isUserLoggedIn(){
-    if(this.loggedIn){
+    if(localStorage.getItem('token')){
         return true;
     }
     else{

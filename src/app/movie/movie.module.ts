@@ -4,13 +4,16 @@ import { ShellMovieComponent } from './shell-movie/shell-movie.component';
 import {MovieRoutingModule}  from './movie-routing.module';
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import { ListMovieComponent } from './list-movie/list-movie.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [ShellMovieComponent, AddMovieComponent, ListMovieComponent],
   imports: [
     CommonModule,
-    MovieRoutingModule
+    MovieRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports:[ShellMovieComponent,AddMovieComponent,ListMovieComponent]
 })

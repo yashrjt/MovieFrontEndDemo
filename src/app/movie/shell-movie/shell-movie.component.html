@@ -1,14 +1,16 @@
-
-<div class="left-pane">
-    <div>
-        <a routerLink='add'>Add a New Movie</a>
+<div class="flex">
+    <div class="left-pane">
+        <div>
+            <a routerLink='add'>Add a New Movie</a>
+        </div>
+        <div>
+            <a routerLink='viewall'>List All Movies</a>
+        </div>
     </div>
-    <div>
-        <a routerLink='viewall'>List All Movies</a>
+    
+    <div class="right-pane">
+       <router-outlet></router-outlet>
     </div>
-</div>
-
-<div class="right-pane">
-   <router-outlet></router-outlet>
+    
 </div>
 
