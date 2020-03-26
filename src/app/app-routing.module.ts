@@ -4,10 +4,12 @@ import { LoginComponent } from './auth/login/login.component';
 import { MyWishComponent } from './wishlist/my-wish/my-wish.component';
 import { LoginGuard } from './auth/login.guard';
 import {HomeComponent}  from './core/home/home.component';
+import {RegisterComponent}  from './auth/register/register.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'login',component:LoginComponent},
+  {path:'register',component:RegisterComponent},
   {path:'wishlist',component:MyWishComponent,canActivate:[LoginGuard]},
   {path:'movies',loadChildren:'./movie/movie.module#MovieModule',canActivate:[LoginGuard]}
   

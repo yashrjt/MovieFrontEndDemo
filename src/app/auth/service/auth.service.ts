@@ -33,6 +33,18 @@ export class AuthService {
     );
   }
 
+  register(registerData){
+    return this.http.post('http://localhost:80/api/register',registerData,{headers:this.headers}).pipe(
+      map((response)=>{
+     
+      
+          return response;
+      }),
+      catchError((err)=>{
+        throw (err);
+      })
+    );
+  }
 
   logout(){
     localStorage.removeItem('token');
