@@ -1,15 +1,26 @@
 .flex{
+    width:1200px;
+    height:auto;
+    margin:auto;
+    margin-top:50px;
     display: grid;
     grid-gap: 50px;
-    grid-template-columns: 200px 800px;
+    grid-template-columns: 200px 900px;
+   
+     
+     
 }
 
-.left-pane{
+/* .left-pane{
   
 border:solid 1px   #337AB7;
-}
+} */
 
 .right-pane{
    
     border:solid 1px   #337AB7;
+}
+
+a{
+    color:#ffffff;
 }

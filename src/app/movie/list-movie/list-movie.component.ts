@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {ListmovieService}  from '../services/listmovie.service';
 import {Movie}  from '../movie';
+import { DeletemovieService } from '../services/deletemovie.service';
+
 
 @Component({
   selector: 'app-list-movie',
@@ -9,9 +11,14 @@ import {Movie}  from '../movie';
 })
 export class ListMovieComponent implements OnInit {
 
-  constructor(private list:ListmovieService) { }
-  moviesList:Movie[]=[];
+  moviesList:Array<Movie>=[];
+  constructor(private list:ListmovieService,private del:DeletemovieService) { }
+  
   ngOnInit() {
+    this.getMovies();
+  }
+
+  getMovies(){
     this.list.getAllMovies().subscribe((res)=>{
       this.moviesList=res;
     },
@@ -21,4 +28,20 @@ export class ListMovieComponent implements OnInit {
     })
   }
 
+  delMovie($event){
+   
+    this.del.deleteMovie($event).subscribe((res)=>{
+    this.getMovies();
+    console.log("ListMovieComponent -> delMovie -> res", res)
+      
+    },
+    (err)=>{
+    console.log("ListMovieComponent -> ngOnInit -> err", err)
+      
+    })
+  }
+
+  editMovie($event){
+    
+  }
 }

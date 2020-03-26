@@ -1,0 +1,14 @@
+
+.container{
+    margin-top:100px;
+   width:700px;
+   height:300px;
+   background:url(https://maxcdn.icons8.com/app/uploads/2016/03/material-1-1000x563.jpg) no-repeat center; 
+}
+.form-group{
+    margin-top:10px;
+}
+
+.error{
+    color:red;
+}

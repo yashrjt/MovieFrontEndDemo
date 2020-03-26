@@ -9,7 +9,7 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'login',component:LoginComponent},
   {path:'wishlist',component:MyWishComponent,canActivate:[LoginGuard]},
-  {path:'movies',loadChildren:'./movie/movie.module#MovieModule'}
+  {path:'movies',loadChildren:'./movie/movie.module#MovieModule',canActivate:[LoginGuard]}
   
 ];
 

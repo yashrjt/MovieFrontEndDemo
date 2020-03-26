@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit,OnDestroy {
   //lifecylce hooks
   loginForm:FormGroup;
   
-
+  loginError:string;
   constructor(private fb:FormBuilder,private auth:AuthService,private router:Router) { }
 
   ngOnInit() {
@@ -26,17 +26,19 @@ export class LoginComponent implements OnInit,OnDestroy {
   }
 
   loginFormSubmit(){
-    console.log("LoginComponent -> loginForm", this.loginForm.value);
+   
     this.auth.login(this.loginForm.value).subscribe((res)=>{
-    console.log("LoginComponent -> loginFormSubmit -> res", res)
-
+   // console.log("LoginComponent -> loginFormSubmit -> res", res)
+    this.router.navigate(['/home']);
     },
     (err)=>{
-    console.log("LoginComponent -> loginFormSubmit -> err", err)
-      
+   // console.log("LoginComponent -> loginFormSubmit -> err", err)
+    if(err.status===401){
+      this.loginError='Incorrect Email or password';
+    }
     });
     this.loginForm.reset();
-    this.router.navigate(['/home']);
+   
   }
   ngOnDestroy(){
     console.log('Login comp destroyed');

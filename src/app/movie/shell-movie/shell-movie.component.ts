@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-shell-movie',
   templateUrl: './shell-movie.component.html',
@@ -10,6 +11,7 @@ export class ShellMovieComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+   
   }
 
 }

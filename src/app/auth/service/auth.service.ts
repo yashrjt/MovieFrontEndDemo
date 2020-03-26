@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map,catchError} from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,12 +22,13 @@ export class AuthService {
   login(loginData){
     return this.http.post('http://localhost:80/api/login',loginData,{headers:this.headers}).pipe(
       map((response)=>{
+     
         localStorage.setItem('token',response['token']);
         this.isLoggedInSubject.next(true);
           return response;
       }),
       catchError((err)=>{
-        return err;
+        throw (err);
       })
     );
   }

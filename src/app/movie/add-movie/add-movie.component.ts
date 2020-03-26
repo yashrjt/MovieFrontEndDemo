@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output ,EventEmitter} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { AddmovieService } from '../services/addmovie.service';
+
 
 @Component({
   selector: 'app-add-movie',
@@ -11,13 +11,14 @@ export class AddMovieComponent implements OnInit {
 
   addMovieForm:FormGroup;
 
-  constructor(private fb:FormBuilder,private addMovie:AddmovieService) { }
-
+  @Output() formValues:EventEmitter<any>=new EventEmitter();
+  constructor(private fb:FormBuilder) { }
+  formValue;
   ngOnInit() {
 
     this.addMovieForm=this.fb.group({
       director:[''],
-      movieId:[''],
+      movieid:[''],
       description:[''],
       mpaa:[''],
       relaseDate:[''],
@@ -30,13 +31,18 @@ export class AddMovieComponent implements OnInit {
   }
 
   addMovieFormSubmit(){
-    console.log(this.addMovieForm.value);
-    this.addMovie.createMovies(this.addMovieForm.value).subscribe(res=>{
-    console.log("AddMovieComponent -> addMovieFormSubmit -> res", res)
-    },
-    (err)=>{
-    console.log("AddMovieComponent -> addMovieFormSubmit -> err", err)
-    });
+  // to create a clone and convert a string value to number by adding a + sign
+  // const x={
+  //   id:'101',
+  //   name:'yash'
+  // }
+  // const cloneofx={...x,id:+x['id']};
+  
+  // console.log( cloneofx);
+    const value = { ...this.addMovieForm.value, movieid: +this.addMovieForm.value.movieid };
+       this.formValues.emit(value);
+    // console.log("AddMovieComponent -> addMovieFormSubmit -> value", value)
+  
    this.addMovieForm.reset();
   }
 }
