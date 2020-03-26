@@ -15,8 +15,8 @@ export class ListmovieService {
   constructor(private http:HttpClient) { }
 
 
-  getAllMovies(){
-    return this.http.get('http://localhost:80/api/movies/getAllMovies',{headers:this.headers}).pipe(
+  getAllMovies():Observable<Movie[]>{
+    return <Observable<Movie[]>>this.http.get('http://localhost:80/api/movies/getAllMovies',{headers:this.headers}).pipe(
       map((response)=>{
           return response;
       }),
