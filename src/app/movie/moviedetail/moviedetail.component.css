@@ -1,0 +1,16 @@
+div.panel-heading {
+    font-size: x-large; 
+ }
+
+ .panel-body{
+     width:1000px;
+    
+     margin:auto;
+     margin-top:100px;
+     border: solid 1px #ffffff;
+     padding:50px;
+ }
+
+ .backbutton{
+     margin-top: 30px;
+ }

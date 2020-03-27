@@ -8,10 +8,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MoviedetailComponent } from './moviedetail/moviedetail.component';
 import { DisplayMoviesComponent } from './display-movies/display-movies.component';
 import { MovieComponent } from './movie/movie.component';
+import { StarComponent } from './star/star.component';
 
 
 @NgModule({
-  declarations: [ShellMovieComponent, AddMovieComponent, ListMovieComponent, MoviedetailComponent, DisplayMoviesComponent, MovieComponent],
+  declarations: [ShellMovieComponent, AddMovieComponent, ListMovieComponent, MoviedetailComponent, DisplayMoviesComponent, MovieComponent, StarComponent],
   imports: [
     CommonModule,
     MovieRoutingModule,

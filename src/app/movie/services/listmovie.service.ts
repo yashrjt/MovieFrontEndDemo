@@ -25,4 +25,15 @@ export class ListmovieService {
       })
     );
   }
+
+  getMovieDetail(id){
+    return <Observable<Movie[]>>this.http.get(`http://localhost:80/api/movies/getMovie/${id}`,{headers:this.headers}).pipe(
+      map((response)=>{
+          return response;
+      }),
+      catchError((err)=>{
+        return err;
+      })
+    );
+  }
 }
