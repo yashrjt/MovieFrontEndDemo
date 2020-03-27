@@ -10,7 +10,7 @@ import { Movie } from '../movie';
 export class MoviedetailComponent implements OnInit {
 
   constructor(private route:ActivatedRoute,private list:ListmovieService,private router:Router) { }
-  movie={};
+  movie:Movie;
 
   ngOnInit() {
    const movieid= this.route.snapshot.params.id

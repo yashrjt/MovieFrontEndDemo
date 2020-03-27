@@ -5,47 +5,47 @@
             
             <div class="row">
                     <div class="col-md-4">Title: </div>
-                    <div class="col-md-8">{{ movie.title }}</div>
+                    <div class="col-md-8">{{ movie?.title }}</div>
                 </div>
             <div class="row">
                 <div class="col-md-4">Description: </div>
-                <div class="col-md-8">{{ movie.description }}</div>
+                <div class="col-md-8">{{ movie?.description }}</div>
             </div>
             <div class="row">
                 <div class="col-md-4">Director: </div>
-                <div class="col-md-8">{{ movie.director }}</div>
+                <div class="col-md-8">{{ movie?.director }}</div>
             </div>
             <div class="row">
                 <div class="col-md-4">Release Date: </div>
-                <div class="col-md-8">{{ movie.releaseDate | date}}</div>
+                <div class="col-md-8">{{ movie?.releaseDate | date}}</div>
             </div>
             <div class="row">
                 <div class="col-md-4">MPAA Film Rating: </div>
-                <div class="col-md-8">{{ movie.mpaa | uppercase}}</div>
+                <div class="col-md-8">{{ movie?.mpaa | uppercase}}</div>
             </div>
             <div class="row">
                 <div class="col-md-4">Category: </div>
-                <div class="col-md-8">{{ movie.category |titlecase}}</div>
+                <div class="col-md-8">{{ movie?.category |titlecase}}</div>
             </div>
             <div class="row">
                 <div class="col-md-4">Tags:</div>
-                <div class="col-md-8">{{movie.tags}}</div>
+                <div class="col-md-8">{{movie?.tags}}</div>
                 <span class="glyphicon glyphicon-star"></span>  
             </div>
             <div class="row">
                 <div class="col-md-4">Star Rating: </div>
                 <div class="col-md-8">
-                    <app-star [rating]="movie.starRating"></app-star>
+                    <app-star [rating]="movie?.starRating"></app-star>
                   
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">Audience Approval: </div>
-                <div class="col-md-8">{{ movie.approvalRating | percent:'1.0-0' }}</div>
+                <div class="col-md-8">{{ movie?.approvalRating | percent:'1.0-0' }}</div>
             </div>
             <div class="row">
                 <div class="col-md-4">Average DVD Price: </div>
-                <div class="col-md-8">{{ movie.price | currency:'USD':'symbol' }}</div>
+                <div class="col-md-8">{{ movie?.price | currency:'USD':'symbol' }}</div>
             </div>
         </div>
     

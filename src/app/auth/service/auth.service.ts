@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map,catchError} from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
+import {environment}  from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   headers=new HttpHeaders({'Content-Type':'application/json'});
+  public apiUrl=environment.API_URL;
 
   constructor(private http:HttpClient) { }
   //observable---stream of data
@@ -20,7 +23,7 @@ export class AuthService {
   //observables--anh,ellis,rayan are obervables
  //by default observables are lazy..
   login(loginData){
-    return this.http.post('http://localhost:80/api/login',loginData,{headers:this.headers}).pipe(
+    return this.http.post(`${this.apiUrl}/api/login`,loginData,{headers:this.headers}).pipe(
       map((response)=>{
      
         localStorage.setItem('token',response['token']);
@@ -34,7 +37,7 @@ export class AuthService {
   }
 
   register(registerData){
-    return this.http.post('http://localhost:80/api/register',registerData,{headers:this.headers}).pipe(
+    return this.http.post(`${this.apiUrl}/api/register`,registerData,{headers:this.headers}).pipe(
       map((response)=>{
      
       
