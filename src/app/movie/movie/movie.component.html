@@ -1,3 +1,4 @@
-<app-add-movie (formValues)="formData($event)"></app-add-movie>
+<app-add-movie (formValues)="formData($event)" (updateformValues)="updateFormData($event)" (currentMovieId)="getMovieDetail($event)" 
+[currentMovieDetail]="movieDetail"></app-add-movie>
 
 

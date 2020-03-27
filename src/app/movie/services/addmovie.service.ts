@@ -23,4 +23,15 @@ export class AddmovieService {
       })
     );
   }
+
+  updateMovie(movie,movieid){
+    return this.http.patch(`${this.apiUrl}/api/movies/updateMovie/${movieid}`,movie,{headers:this.headers}).pipe(
+      map((response)=>{
+          return response;
+      }),
+      catchError((err)=>{
+        return err;
+      })
+    );
+  }
 }

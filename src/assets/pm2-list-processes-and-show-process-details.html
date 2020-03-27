@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <title>PM2 — List Processes and Show Process Details</title>
+
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description"
+          content="Future Studio provides on-demand learning & wants you to become a better Android (Retrofit, Gson, Glide, Picasso) and Node.js/hapi developer!">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/images/favicons/manifest.json">
+    <link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#9b59b6">
+    <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Future Studio">
+    <meta name="application-name" content="Future Studio">
+    <meta name="msapplication-config" content="/images/favicons/browserconfig.xml">
+
+    <meta name="theme-color" content="#9b59b6">
+
+    <link rel="publisher" href="https://plus.google.com/+FutureStudioUniversity"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/main.css?v=4.10.0"/>
+
+        <link href="//vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,700" rel="stylesheet">
+
+    <style>
+        .hex.author>a,
+        .hex-small.author>a {
+            background-image: url(//www.gravatar.com/avatar/8bdc80a9711edce0c9cf12684c185454?s=250&d=mm&r=x);
+        }
+
+        .affix-wrapper {
+            position: relative;
+        }
+    </style>
+
+</head>
+<body>
+<script src="//use.typekit.net/qbu4yjt.js"></script>
+<script>
+    try {
+        Typekit.load({ async: true });
+    } catch (e) {
+    }
+</script>
+
+
+
+
+        <div class="h-wrapper">
+            <header class="main-header">
+    <nav class="navbar navbar-default">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <img alt="Future Studio" src="/images/futurestudio-logo-transparent.png" class="pull-left">
+                <div class="pull-left">Future Studio</div>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                    <li class="">
+                        <a href="/university">University</a>
+                    </li>
+                <li class="dropdown active">
+                    <a href="/tutorials" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                        aria-haspopup="true" aria-expanded="false">Tutorials
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-indented">
+                        <li>
+                            <a href="/tutorials">Overview</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a href="/tutorials/retrofit-getting-started-and-android-client">Retrofit</a>
+                        </li>
+                        <li>
+                            <a href="/tutorials/glide-getting-started">Glide</a>
+                        </li>
+                        <li>
+                            <a href="/tutorials/picasso-getting-started-simple-loading">Picasso</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/tutorials/gson-getting-started-with-java-json-serialization-deserialization">Gson</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a href="/tutorials/hapi-get-your-server-up-and-running">hapi</a>
+                        </li>
+                        <li>
+                            <a href="/tutorials/coreos-platform-introduction-and-components">CoreOS</a>
+                        </li>
+                        <li>
+                            <a href="/tutorials/strider-getting-started-platform-overview">Strider</a>
+                        </li>
+                        <li>
+                            <a href="/tutorials/pm2-utility-overview-installation">PM2</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a href="/tutorials/how-to-become-a-better-developer-1-keep-exploring">Become a Better
+                                Developer</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a href="/tutorials?filter=premium_tutorials&filter=premium_videos">Premium Content</a>
+                        </li>
+                        <li>
+                            <a href="/tutorials?filter=video">Video Content</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="/books">Books</a>
+                </li>
+                <li class="">
+                    <a href="/learningpaths">Learning Paths</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/login">Sign in</a>
+                    </li>
+                    <li>
+                        <a href="/university" class="fs-btn fs-btn-premium">Enroll</a>
+                    </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right navbar-socials">
+                <li>
+                    <a href="https://www.youtube.com/channel/UCWIA0jryy_aEd9u6JTe1S9Q" title="Future Studio on YouTube"
+                        target="_blank">
+                        <i class="fa fa-youtube fa-lg"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/futurestud_io" title="Future Studio on Twitter" target="_blank">
+                        <i class="fa fa-twitter fa-lg"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/futurestudio" title="Future Studio on GitHub" target="_blank">
+                        <i class="fa fa-github fa-lg"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/search" title="Search">
+                        <i class="fa fa-search fa-lg"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+
+    </nav>
+</header>
+        </div>
+
+    <div class="blog-filter">
+    <div class="container-lg">
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-home"></i></a></li>
+            <li><a href="/tutorials">Tutorials</a></li>
+            <li class="active">PM2 — List Processes and Show Process Details</li>
+        </ol>
+    </div>
+</div>
+
+<div class="container-lg">
+    
+
+    <article role="main">
+
+        <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+                <div class="tutorial-icons text-center">
+                    <i class="fa fa-fw"></i>
+                    <i class="fa fa-fw"></i>
+                </div>
+                <header>
+                    <h1 class="post-title text-center" id="title">PM2 — List Processes and Show Process Details</h1>
+                </header>
+                <aside class="meta-author text-center">
+                        <div class="hex-small author">
+                            <a href="/tutorials/author/marcus" title="Future Studio Author Marcus Pöhls">
+                                <div class="hex-1"></div>
+                                <div class="hex-2"></div>
+                            </a>
+                        </div>
+                        <span>by <a href="/tutorials/author/marcus">Marcus Pöhls</a></span>
+                    <span>
+                            on <time
+                                datetime="2015-10-21">October 21 2015</time>,
+                            tagged in
+ 
+                        <a href="/tutorials/tag/server" title="Server" class="tag-3 favorite-link">Server</a>, 
+                        <a href="/tutorials/tag/pm2" title="PM2" class="tag-44 favorite-link">PM2</a></span>
+                    <span>, 9 min read</span>
+                </aside>
+
+                <div class="text-center meta-post-links">
+
+
+                </div>
+            </div>
+        </div>
+
+            <div class="row">
+                <div id="moonshoot" class="hidden-xs hidden-sm col-md-3 scrollspy">
+                    <div class="affix-wrapper" data-spy="affix">
+                        <h3>Moonshoot</h3>
+                        <ul class="nav spoiler"><li><a href="#title">Intro</a></li><li><a href="#listprocesses">List Processes</a></li><li><a href="#processdetails">Process Details</a></li><li><a href="#whatcomesnext">What Comes Next</a></li></ul><div class="feature-teaser">
+                                    <aside class="aside-info text-center fs-background">
+                                        <p><i class="fa fa-star fa-2x"></i></p>
+                                        <p>Moonshoot is a<br>Student Feature.</p>
+                                        <a href="/university#student-features" class="fs-btn fs-btn-real-black fs-btn-sm">Show more</a>
+                                    </aside>
+                                </div>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div id="js-post-content" class="post-content">
+                        <p>The last two blog posts on PM2 covered the utility overview and guided you through the process management including start, restart, stop and delete processes of various types (Node.js, Ruby, Python, PHP, etc). </p>
+
+<p>Once you have processes started with PM2, you want to get a comprehensive overview of currently running apps. This article got you covered and shows you how to print the list of processes managed by PM2. Furthermore, we use PM2 to show detailed information on specific processes.</p>
+
+<p><h2>PM2 Series Overview</h2>
+
+<div class="outline">
+    <ul class="nav nav-tabs outline-categories" role="tablist">
+        <li role="presentation" >
+            <a href="#0" aria-controls="0" role="tab" data-toggle="tab">PM2</a>
+        </li>
+        <li role="presentation" class="active" >
+            <a href="#1" aria-controls="1" role="tab" data-toggle="tab">Process Management</a>
+        </li>
+        <li role="presentation" >
+            <a href="#2" aria-controls="2" role="tab" data-toggle="tab">Advanced Configuration</a>
+        </li>
+        <li role="presentation" >
+            <a href="#3" aria-controls="3" role="tab" data-toggle="tab">Utility</a>
+        </li>
+        <li role="presentation" >
+            <a href="#4" aria-controls="4" role="tab" data-toggle="tab">Process &amp; App Starts</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane " id="0">
+            <div class="fs-slider-wrap hidden-xs">
+                <ol class="fs-slider">
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-utility-overview-installation" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Utility Overview &amp; Installation
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-series-round-up" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Series Round-Up
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                </ol>
+                <div class="col-xs-12 text-center">
+                    <a class="fs-slider-toggle" data-direction="left"><i
+                        class="fa fa-play-circle fa-flip-horizontal"></i> Prev</a>
+                    <span class="success"> | </span>
+                    <a class="fs-slider-toggle" data-direction="right">Next <i class="fa fa-play-circle"></i></a>
+                </div>
+            </div>
+            <div class="outline-list visible-xs">
+                <ol>
+                    <li class="">
+                        <a href="pm2-utility-overview-installation">
+                            Utility Overview &amp; Installation
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-series-round-up">
+                            Series Round-Up
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane active" id="1">
+            <div class="fs-slider-wrap hidden-xs">
+                <ol class="fs-slider">
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-process-management" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Process Management
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card active">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    List Processes and Show Process Details
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-restart-processes-after-system-reboot" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Restart Processes After System Reboot
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-cluster-mode-and-zero-downtime-restarts" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Cluster Mode and Zero-Downtime Restarts
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-apply-actions-to-a-selected-process-in-process-file-json-js-yaml" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Apply Actions to a Selected Process in Process File (JSON/JS/YAML)
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                </ol>
+                <div class="col-xs-12 text-center">
+                    <a class="fs-slider-toggle" data-direction="left"><i
+                        class="fa fa-play-circle fa-flip-horizontal"></i> Prev</a>
+                    <span class="success"> | </span>
+                    <a class="fs-slider-toggle" data-direction="right">Next <i class="fa fa-play-circle"></i></a>
+                </div>
+            </div>
+            <div class="outline-list visible-xs">
+                <ol>
+                    <li class="">
+                        <a href="pm2-process-management">
+                            Process Management
+                        </a>
+                    </li>
+                    <li class="active">
+                            List Processes and Show Process Details
+                    </li>
+                    <li class="">
+                        <a href="pm2-restart-processes-after-system-reboot">
+                            Restart Processes After System Reboot
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-cluster-mode-and-zero-downtime-restarts">
+                            Cluster Mode and Zero-Downtime Restarts
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-apply-actions-to-a-selected-process-in-process-file-json-js-yaml">
+                            Apply Actions to a Selected Process in Process File (JSON/JS/YAML)
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane " id="2">
+            <div class="fs-slider-wrap hidden-xs">
+                <ol class="fs-slider">
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-advanced-app-configuration-with-json-file" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Advanced App Configuration with JSON File
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-module-system" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Module System
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-create-multiple-environments-in-process-file-json-js-yaml" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Create Multiple Environments in Process File (JSON/JS/YAML)
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                </ol>
+                <div class="col-xs-12 text-center">
+                    <a class="fs-slider-toggle" data-direction="left"><i
+                        class="fa fa-play-circle fa-flip-horizontal"></i> Prev</a>
+                    <span class="success"> | </span>
+                    <a class="fs-slider-toggle" data-direction="right">Next <i class="fa fa-play-circle"></i></a>
+                </div>
+            </div>
+            <div class="outline-list visible-xs">
+                <ol>
+                    <li class="">
+                        <a href="pm2-advanced-app-configuration-with-json-file">
+                            Advanced App Configuration with JSON File
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-module-system">
+                            Module System
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-create-multiple-environments-in-process-file-json-js-yaml">
+                            Create Multiple Environments in Process File (JSON/JS/YAML)
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane " id="3">
+            <div class="fs-slider-wrap hidden-xs">
+                <ol class="fs-slider">
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-update-the-utility" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Update the Utility
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-cpu-memory-monitoring" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    CPU/Memory Monitoring
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-log-handling" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Log Handling
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-command-line-autocompletion" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Command Line Autocompletion
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                </ol>
+                <div class="col-xs-12 text-center">
+                    <a class="fs-slider-toggle" data-direction="left"><i
+                        class="fa fa-play-circle fa-flip-horizontal"></i> Prev</a>
+                    <span class="success"> | </span>
+                    <a class="fs-slider-toggle" data-direction="right">Next <i class="fa fa-play-circle"></i></a>
+                </div>
+            </div>
+            <div class="outline-list visible-xs">
+                <ol>
+                    <li class="">
+                        <a href="pm2-update-the-utility">
+                            Update the Utility
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-cpu-memory-monitoring">
+                            CPU/Memory Monitoring
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-log-handling">
+                            Log Handling
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-command-line-autocompletion">
+                            Command Line Autocompletion
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane " id="4">
+            <div class="fs-slider-wrap hidden-xs">
+                <ol class="fs-slider">
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-how-to-start-your-app-with-node-js-v8-arguments" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    How to Start Your App With Node.js V8 Arguments
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-use-npm-to-start-your-app" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Use NPM to Start Your App
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-start-node-js-app-with-increased-memory-limit-from-command-line" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Start Node.js App With Increased Memory Limit From Command Line
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-start-node-js-app-with-increased-memory-limit-from-json-configuration" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Start Node.js App With Increased Memory Limit From JSON Configuration
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                    <li class="fs-slider-item text-center ">
+                        <a href="pm2-start-multiple-apps-with-a-single-process-file-json-js-yaml" >
+                        <div class="tutorial-icons text-center">
+                            <i class="fa fa-fw"></i>
+                            <i class="fa fa-fw"></i>
+                        </div>
+                        <div class="tutorial-card ">
+                            <div class="image" "></div>
+                            <div class="tutorial-card-bottom">
+                                <p data-equalizerGroup="tutorial-title">
+                                    Start Multiple Apps With A Single Process File (JSON/JS/YAML)
+                                </p>
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                </ol>
+                <div class="col-xs-12 text-center">
+                    <a class="fs-slider-toggle" data-direction="left"><i
+                        class="fa fa-play-circle fa-flip-horizontal"></i> Prev</a>
+                    <span class="success"> | </span>
+                    <a class="fs-slider-toggle" data-direction="right">Next <i class="fa fa-play-circle"></i></a>
+                </div>
+            </div>
+            <div class="outline-list visible-xs">
+                <ol>
+                    <li class="">
+                        <a href="pm2-how-to-start-your-app-with-node-js-v8-arguments">
+                            How to Start Your App With Node.js V8 Arguments
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-use-npm-to-start-your-app">
+                            Use NPM to Start Your App
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-start-node-js-app-with-increased-memory-limit-from-command-line">
+                            Start Node.js App With Increased Memory Limit From Command Line
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-start-node-js-app-with-increased-memory-limit-from-json-configuration">
+                            Start Node.js App With Increased Memory Limit From JSON Configuration
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="pm2-start-multiple-apps-with-a-single-process-file-json-js-yaml">
+                            Start Multiple Apps With A Single Process File (JSON/JS/YAML)
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+</p>
+
+<h2 id="listprocesses">List Processes</h2>
+
+<p>The previous article shows how to start app servers with PM2. To get an overview of the processes currently managed by PM2, you can print out a comprehensive list using the command line utility.</p>
+
+<pre class="line-numbers" data-line=><code class="language-bash">pm2 list  
+# or
+pm2 ls|l|status  
+</code></pre>
+
+<p><code>pm2 ls|l|status</code> will print the same information als <code>pm2 list</code> and you can use whatever you prefer. The list of processes will look like this:</p>
+
+<pre class="line-numbers" data-line=><code class="language-bash">$ pm2 list
+│ App name │ id │ mode │ pid   │ status │ restart │ uptime │ memory      │ watching │
+-------------------------------------------------------------------------------------
+│ homepage │ 0  │ fork │ 39535 │ online │ 0       │ 31m    │ 86.355 MB   │ disabled │
+</code></pre>
+
+<p>The output shows basic information about the running processes like app name and id, the mode (<code>fork</code> or <code>cluster</code>), status, uptime, memory footprint, etc. Most of the time, this basic information is sufficient to see if all servers run correctly or if there are any issues to solve.</p>
+
+<p>If you need parsable output, you can use PM2’s <code>jlist</code> command to receive the process list in JSON format. There is also a <code>prettylist</code> command to have beautified printing of the process list in JSON format using the command line.</p>
+
+<pre class="line-numbers" data-line=><code class="language-json">[ { pid: 39535,
+    name: 'homepage',
+    pm2_env:
+     { name: 'homepage',
+       … 
+     }
+} ]
+</code></pre>
+
+<p>The JSON format is useful when making process information accessible via HTTP endpoints or as webhooks on process changes.</p>
+
+<h2 id="processdetails">Process Details</h2>
+
+<p>In situations like downtimes and server restart failures, it’s not enough to just print a basic process overview. In those situations, you’re in the need of further information about the process itself and the location of error and output logs. You can print out detail process information using the <code>show</code> or <code>describe</code> commands:</p>
+
+<pre class="line-numbers" data-line=><code class="language-bash">pm2 show &lt;process-name|process-id&gt;  
+# or
+pm2 describe &lt;process-name|process-id&gt;  
+</code></pre>
+
+<p>Both commands (<code>show</code> and <code>describe</code>) result in the same output. The detailed process information listing contains data like <code>.pid</code> file location, app root path, out log and error log file paths, starting mode, uptime, interpreter, number restarts, etc.</p>
+
+<pre class="line-numbers" data-line=><code class="language-bash">$ pm2 describe homepage
+Describing process with id 0 - name homepage  
+ -----------------------------------------------------------------------------
+│ status            │ online                                                  │
+│ name              │ homepage                                                │
+│ id                │ 0                                                       │
+│ path              │ /Users/marcuspoehls/Dev/FutureStudio/homepage/server    │
+│ args              │                                                         │
+│ exec cwd          │ /Users/marcuspoehls/Dev/FutureStudio/homepage           │
+│ error log path    │ /Users/marcuspoehls/.pm2/logs/homepage-error-0.log      │
+│ out log path      │ /Users/marcuspoehls/.pm2/logs/homepage-out-0.log        │
+│ pid path          │ /Users/marcuspoehls/.pm2/pids/homepage-0.pid            │
+│ mode              │ fork_mode                                               │
+│ node v8 arguments │                                                         │
+│ watch &amp; reload    │ ✘                                                      │
+│ interpreter       │ node                                                    │
+│ restarts          │ 0                                                       │
+│ unstable restarts │ 0                                                       │
+│ uptime            │ 31m                                                     │
+│ created at        │ 2015-09-21T11:06:52.342Z                                │
+ -----------------------------------------------------------------------------
+</code></pre>
+
+<p>If you didn’t choose a speaking app name, one of the most interesting parts in the process information output is the <code>path</code>. The path you help you assign the PM2 process to the actual project. </p>
+
+<p>However, the other interesting parts within the listing are the error and out log paths. You can customize both paths by passing option parameters to the <code>pm2 start</code> command. By default, PM2 saves all log files within the hidden <code>.pm2</code> folder in the root of your systems user home directory. The name of the log files are the app name concatenated by <code>-error-x.log</code> and <code>-out-x.log</code>. We’ll extensively cover the log handling with PM2 in a later post within this series.</p>
+
+<h3 id="pm2processdetailswithinagitrepository">PM2 Process Details Within a Git Repository</h3>
+
+<p>When navigating into the project folder of one of the managed processes, PM2 will additionally show revision control metadata if the project folder is also a revision control directory. We use the Future Studio homepage for illustration purposes within this series and if we <code>cd</code> into the project folder, which is a git repository as well, we’ll see the revision control metadata output below the process information.</p>
+
+<pre class="line-numbers" data-line=><code class="language-bash">$ pm2 describe homepage
+Describing process with id 0 - name homepage  
+ -----------------------------------------------------------------------------
+│ status            │ online                                                  │
+│ name              │ homepage                                                │
+│ id                │ 0                                                       │
+│ path              │ /Users/marcuspoehls/Dev/FutureStudio/homepage/server    │
+│ args              │                                                         │
+│ exec cwd          │ /Users/marcuspoehls/Dev/FutureStudio/homepage           │
+│ error log path    │ /Users/marcuspoehls/.pm2/logs/homepage-error-0.log      │
+│ out log path      │ /Users/marcuspoehls/.pm2/logs/homepage-out-0.log        │
+│ pid path          │ /Users/marcuspoehls/.pm2/pids/homepage-0.pid            │
+│ mode              │ fork_mode                                               │
+│ node v8 arguments │                                                         │
+│ watch &amp; reload    │ ✘                                                      │
+│ interpreter       │ node                                                    │
+│ restarts          │ 0                                                       │
+│ unstable restarts │ 0                                                       │
+│ uptime            │ 31m                                                     │
+│ created at        │ 2015-09-21T11:06:52.342Z                                │
+ -----------------------------------------------------------------------------
+
+Revision control metadata  
+ ------------------------------------------------------------------------
+│ revision control │ git                                                 │
+│ remote url       │ ssh://gitserver@futustudio.io/urlto/homepage.git    │
+│ repository root  │ /Users/marcuspoehls/Dev/FutureStudio/homepage       │
+│ last update      │ 2015-09-21T11:37:51.000Z                            │
+│ revision         │ ab555c55d555e55555555fg55h555ij555klm555            │
+│ comment          │ latest commit message                               │
+│ branch           │ develop                                             │
+ ------------------------------------------------------------------------
+</code></pre>
+
+<p>The revision control metadata can be helpful in cases when the app doesn’t work properly and you’re wondering if you pulled the latest code changes from your co-workers.</p>
+
+<h2 id="whatcomesnext">What Comes Next</h2>
+
+<p>Within this and the previous two articles, you learned the fundamentals to manage your processes with PM2. The latest post guided you through the phases of starting, restarting, stopping and deleting servers. This posts shows you how to show an overview of currently managed processes by PM2 and how to output detailed information about an individual app instance.</p>
+
+<p>The next post guides you through the update process of PM2 itself.</p>
+
+<p>If you’ve additional tips and tricks to list or show detailed process information with PM2, please share them with us in the comments below or shoot us <a href="https://twitter.com/futurestud_io">@futurestud_io</a>.</p>
+                    </div>
+                </div>
+
+            </div>
+    </article>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-9">
+            <div class="row">
+    <div class="col-xs-12">
+
+        <section class="newsletter-signup text-center">
+            <h2>
+                Get Notified on New Future Studio <br>
+                Content and Platform Updates
+            </h2>
+            <p>
+                Get your weekly push notification about new and trending <br>
+                Future Studio content and recent platform enhancements
+            </p>
+
+            <!-- Begin MailChimp Signup Form -->
+            <div class="row mc-field-group">
+                <form
+                    action="//futurestud.us10.list-manage.com/subscribe/post?u=379e055b1f73c9b53abc609f8&amp;id=78c150fcaa"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_blank" novalidate>
+                    <div class="form-group col-sm-6 col-sm-offset-3">
+                        <input type="email" value="" name="EMAIL" class="required email form-control"
+                               placeholder="Email address" id="mce-EMAIL">
+                    </div>
+                    <div class="form-group col-sm-6 col-sm-offset-3">
+                        <input type="text" value="" name="FNAME" class="form-control" id="mce-FNAME"
+                               placeholder="First Name (optional)">
+                    </div>
+                    <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                            class="fs-btn fs-btn-success-inverse">Subscribe
+                    </button>
+
+                    <div id="mce-responses" class="clear">
+                        <div class="response" id="mce-error-response"></div>
+                        <div class="response" id="mce-success-response"></div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </div>
+</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-9">
+            <section class="share text-center">
+                <a class="fa fa-twitter tw"
+                    href="http://twitter.com/share?text=PM2 — List Processes and Show Process Details;url=http://futurestud.io/tutorials/pm2-list-processes-and-show-process-details"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');_paq.push(['trackEvent', 'Share', 'http://futurestud.io/tutorials/pm2-list-processes-and-show-process-details', 'Twitter']);return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="fa fa-facebook fb"
+                    href="https://www.facebook.com/sharer/sharer.php?u=http://futurestud.io/tutorials/pm2-list-processes-and-show-process-details"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');_paq.push(['trackEvent', 'Share', 'http://futurestud.io/tutorials/pm2-list-processes-and-show-process-details', 'Facebook']);return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="fa fa-google-plus google"
+                    href="https://plus.google.com/share?url=http://futurestud.io/tutorials/pm2-list-processes-and-show-process-details"
+                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');_paq.push(['trackEvent', 'Share', 'http://futurestud.io/tutorials/pm2-list-processes-and-show-process-details', 'Google+']);return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-9">
+                <div class="post-author row">
+                    <div class="col-xs-4 col-sm-2">
+
+                            <div class="hex author">
+                                <a href="/tutorials/author/marcus" title="Future Studio Author Marcus Pöhls">
+                                    <div class="hex-1"></div>
+                                    <div class="hex-2"></div>
+                                </a>
+                            </div>
+                    </div>
+                    <div class="col-xs-8 col-sm-10">
+                        <h4>
+                            <a href="/tutorials/author/marcus" class="url">Marcus Pöhls</a>
+                        </h4>
+
+                        <p>Marcus is a fullstack JS developer. He’s passionate about the hapi framework for Node.js and loves to build web apps and APIs. Creator of Futureflix and the “learn hapi” learning path.</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+        </div>
+    </div>
+
+<div class="row">
+        <div class="col-md-offset-3 col-md-9">
+            <div class="post-navigation"></div>
+        </div>
+
+        <div id="disqus_thread" class="col-md-offset-3 col-md-9"></div>
+</div>
+
+</div>
+
+<div class="container explore">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="text-center">Explore the Library</h1>
+            <p class="lead text-center">Find interesting tutorials and solutions for your problems.</p>
+        </div>
+
+        <div class="col-xs-6 col-sm-3">
+            <h4>Android</h4>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="/tutorials/tag/retrofit">Retrofit</a></li>
+                <li role="presentation"><a href="/tutorials/tag/gson">Gson</a></li>
+                <li role="presentation"><a href="/tutorials/tag/picasso">Picasso</a></li>
+                <li role="presentation"><a href="/tutorials/tag/glide">Glide</a></li>
+                <li role="presentation"><a href="/tutorials/tag/textview">TextView</a></li>
+                <li role="presentation"><a href="/tutorials/tag/android-studio">Android Studio</a></li>
+                <li role="presentation"><a href="/tutorials/tag/android-quick-tips">Android Quick Tips</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <h4>Node.js</h4>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="/tutorials/tag/hapi">hapi</a></li>
+                <li role="presentation"><a href="/tutorials/tag/pm2">PM2</a></li>
+                <li role="presentation"><a href="/tutorials/tag/strider">Strider</a></li>
+                <li role="presentation"><a href="/tutorials/tag/npm">NPM</a></li>
+                <li role="presentation"><a href="/tutorials/tag/thinky">Thinky</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-12 visible-xs"></div>
+        <div class="col-xs-6 col-sm-3">
+            <h4>Server</h4>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="/tutorials/tag/rethinkdb">RethinkDB</a></li>
+                <li role="presentation"><a href="/tutorials/tag/coreos">CoreOS</a></li>
+                <li role="presentation"><a href="/tutorials/tag/nginx">nginx</a></li>
+                <li role="presentation"><a href="/tutorials/tag/mongodb">MongoDB</a></li>
+                <li role="presentation"><a href="/tutorials/tag/server">Various Server Posts</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <h4>Miscellaneous</h4>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="/tutorials/tag/better-developer">Better Developer</a></li>
+                <li role="presentation"><a href="/tutorials/tag/productivity">Productivity</a></li>
+                <li role="presentation"><a href="/tutorials/tag/tools">Tools</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<footer role="contentinfo">
+    <div class="inner container-lg">
+        <a href="/tutorials/rss" id="btn_feed" class="fs-btn" title="Feed" target="_blank">
+            <i class="fa fa-rss"></i>
+            <strong>Feed</strong>
+        </a>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h3>
+                    <img src="/images/futurestudio-logo-transparent.png" alt="Future Studio"> Future Studio
+                </h3>
+                <p class="clearfix footer-fs-description">
+                    Future Studio is helping 5,000+ users daily to solve Android and Node.js problems with 460+ written
+                    tutorials and videos. We’re on a mission to publish practical and helpful content every week.
+                </p>
+            </div>
+
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <h4>Future Studio</h4>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li role="presentation">
+                                <a href="/">Home</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="/university">University</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="/tutorials">Tutorials</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="/learningpaths">Learning Paths</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="/about">About Us</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="https://launch.futurestud.io">
+                                    Launch
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="https://superchargejs.com">
+                                    Supercharge
+                                    <span class="label label-success">new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-3">
+                        <h4>Books</h4>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li role="presentation">
+                                <a href="/books/retrofit">Retrofit</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="/books/gson">Gson</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="/books/picasso">Picasso</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="/books/glide">Glide</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-3">
+                        <h4>Extras</h4>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li role="presentation">
+                                <a href="/downloads">Downloads</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="/galaxy-map">Galaxy Map</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="/favorites">Favorites</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="/search">Search</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-3">
+                        <h4>Games</h4>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li role="presentation">
+                                <a href="https://snake.futurestud.io">
+                                    Snake
+                                    <span class="label label-success">new</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row copyright">
+            <div class="col-sm-6">
+                <p>
+                    <a href="https://www.youtube.com/channel/UCWIA0jryy_aEd9u6JTe1S9Q" title="Future Studio on YouTube"
+                        target="_blank">
+                        <i class="fa fa-youtube fa-2x fa-fw"></i>
+                    </a>
+                    <a href="https://twitter.com/futurestud_io" title="Future Studio on Twitter" target="_blank">
+                        <i class="fa fa-twitter fa-2x fa-fw"></i>
+                    </a>
+                    <a href="https://www.facebook.com/FutureStudioUniversity/" title="Future Studio on Facebook"
+                        target="_blank">
+                        <i class="fa fa-facebook fa-2x fa-fw"></i>
+                    </a>
+                    <a href="https://plus.google.com/+FutureStudioUniversity" title="Future Studio on Google+"
+                        target="_blank">
+                        <i class="fa fa-google-plus fa-2x fa-fw"></i>
+                    </a>
+                    <a href="https://github.com/futurestudio" title="Future Studio’s Open Source Projects"
+                        target="_blank">
+                        <i class="fa fa-github fa-2x fa-fw"></i>
+                    </a>
+                </p>
+            </div>
+            <div class="col-sm-6">
+                <p class="text-right">© 2020
+                    <a href="/" title="Future Studio — we ♥ mobile and web">Future Studio
+                    </a>. All Rights reserved &bull;
+                    <a href="/terms">Terms</a> &bull;
+                    <a href="/privacy">Privacy</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+
+<script type="text/javascript" src="/js/main.js?v=4.10.0"></script>
+
+<script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+
+
+    (function () {
+        var u = "//piwik.futurestud.io/";
+        _paq.push(['setTrackerUrl', u + 'piwik.php']);
+        _paq.push(['setSiteId', 2]);
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        g.type = 'text/javascript';
+        g.async = true;
+        g.defer = true;
+        g.src = u + 'piwik.js';
+        s.parentNode.insertBefore(g, s);
+    })();
+</script>
+<noscript><p><img src="//piwik.futurestud.io/piwik.php?idsite=2" style="border:0;" alt=""/></p></noscript>
+
+<script>
+    $("#mc-embedded-subscribe").click(function () {
+        $("[for='mce-EMAIL']").remove();
+    })
+</script>
+
+    <script>
+        $(document).ready(function () {
+            function affixWidth() {
+                $('.affix-wrapper').width($('#moonshoot').width());
+            }
+
+            $(window).resize(function () {
+                affixWidth()
+            })
+
+            $('body').scrollspy({
+                target: '.scrollspy'
+            })
+
+            $('.affix-wrapper').on('affixed.bs.affix', function () {
+                affixWidth()
+            })
+
+            $('.affix-wrapper').affix({
+                offset: {
+                    top: function () {
+                        return $('#moonshoot').position().top;
+                    },
+                    bottom: function () {
+                        return $('article').outerWidth(true);
+                    }
+                }
+            })
+
+            // jquery smooth scroll for links in Moonshoot
+            // found on "https://css-tricks.com/snippets/jquery/smooth-scrolling"}}
+            $(function () {
+                // only scroll for moonshoot links
+                $('#moonshoot').find('ul li a').click(function () {
+                    if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
+                        let target = $(this.hash)
+                        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']')
+
+                        if (target.length) {
+                            $('html, body').animate({
+                                scrollTop: target.offset().top
+                            }, 400)
+                            return false
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+
+    <script src="/js/prism.js"></script>
+
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'futurestudioblog'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+
+    <!-- Mailchimp JS import -->
+    <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+    <script type='text/javascript'>(function ($) {
+            window.fnames = new Array();
+            window.ftypes = new Array();
+            fnames[0] = 'EMAIL';
+            ftypes[0] = 'email';
+            fnames[1] = 'FNAME';
+            ftypes[1] = 'text';
+        }(jQuery));
+        var $mcj = jQuery.noConflict(true);</script>
+    <!--End mc_embed_signup-->
+
+    <script src="//vjs.zencdn.net/4.12/video.js"></script>
+
+
+</body>
+</html>
