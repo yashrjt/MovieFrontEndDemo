@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { RouterModule } from '@angular/router';
 import { WishlistModule } from './wishlist/wishlist.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -22,7 +24,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     RouterModule,
     WishlistModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TypeaheadModule,
+    
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

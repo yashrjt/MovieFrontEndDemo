@@ -9,17 +9,21 @@ import { MoviedetailComponent } from './moviedetail/moviedetail.component';
 import { DisplayMoviesComponent } from './display-movies/display-movies.component';
 import { MovieComponent } from './movie/movie.component';
 import { StarComponent } from './star/star.component';
+import { SearchListComponent } from './search-list/search-list.component';
 
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @NgModule({
-  declarations: [ShellMovieComponent, AddMovieComponent, ListMovieComponent, MoviedetailComponent, DisplayMoviesComponent, MovieComponent, StarComponent],
+  declarations: [ShellMovieComponent, AddMovieComponent, ListMovieComponent, MoviedetailComponent, DisplayMoviesComponent, MovieComponent, StarComponent, SearchListComponent],
   imports: [
     CommonModule,
     MovieRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TypeaheadModule.forRoot()
+
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  exports:[ShellMovieComponent,AddMovieComponent,ListMovieComponent,MoviedetailComponent,DisplayMoviesComponent,MovieComponent]
+  exports:[ShellMovieComponent,AddMovieComponent,ListMovieComponent,MoviedetailComponent,DisplayMoviesComponent,MovieComponent,SearchListComponent]
 })
 export class MovieModule { }

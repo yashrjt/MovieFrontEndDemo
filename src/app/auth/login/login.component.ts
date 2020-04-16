@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 
@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit,OnDestroy {
   ngOnInit() {
     console.log('Login comp initilaised');
     this.loginForm=this.fb.group({
-      email:[''],
-      password:['']
+      email:['',[Validators.required]],
+      password:['',[Validators.required]]
     })
   }
 
