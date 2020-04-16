@@ -37,4 +37,19 @@ export class ListmovieService {
       })
     );
   }
+
+  searchMovies(term){
+    return <Observable<Movie[]>>this.http.get(`${this.apiUrl}/api/movies/search?searchValue=${term}`,{headers:this.headers}).pipe(
+      map((response)=>{
+        // let movies=[];
+        // response['data'].forEach(element => {
+        //     movies.push(element['title']);
+        // });
+          return response;
+      }),
+      catchError((err)=>{
+        return err;
+      })
+    );
+  }
 }

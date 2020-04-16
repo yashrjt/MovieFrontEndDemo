@@ -24,3 +24,7 @@ border:solid 1px   #337AB7;
 a{
     color:#ffffff;
 }
+
+.search-box{
+    width:500px;
+}
