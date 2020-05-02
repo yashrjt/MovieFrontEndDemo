@@ -49,8 +49,29 @@ export class AuthService {
     );
   }
 
+  googleAuth(){
+   return  this.http.get(`${this.apiUrl}/api/googleAuth`).pipe(
+      map((res)=>{
+      console.log("AuthService -> googleAuth -> res", res)
+          return res;
+      }),
+      catchError((err)=>{
+        throw (err);
+      })
+    );
+  }
+
   logout(){
     localStorage.removeItem('token');
     this.isLoggedInSubject.next(false);
+    //Makes logout call to server to clear cookies
+    return  this.http.get(`${this.apiUrl}/api/logout`).pipe(
+      map((res)=>{
+          return res;
+      }),
+      catchError((err)=>{
+        throw (err);
+      })
+    );
   }
 }
