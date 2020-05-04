@@ -28,6 +28,7 @@ export class AuthService {
      
         localStorage.setItem('token',response['token']);
         this.isLoggedInSubject.next(true);
+        
           return response;
       }),
       catchError((err)=>{
@@ -67,7 +68,9 @@ export class AuthService {
     //Makes logout call to server to clear cookies
     return  this.http.get(`${this.apiUrl}/api/logout`).pipe(
       map((res)=>{
+          document.cookie = "moviejwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
           return res;
+         
       }),
       catchError((err)=>{
         throw (err);
