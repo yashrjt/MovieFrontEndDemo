@@ -11,34 +11,16 @@ export class HeaderComponent implements OnInit {
 
   isUserLoggedIn:boolean;
   constructor(private auth:AuthService,private router:Router) { }
-
-  ngOnInit() {
   
+  ngOnInit() {
     this.auth.isLoggedInObservable.subscribe(value=>{
       this.isUserLoggedIn=value;
-        })
-     this.checkLocalStorage();  
+      console.log("HeaderComponent -> ngOnInit -> this.isUserLoggedIn", this.isUserLoggedIn)
+    })
+
   }
 
-    checkLocalStorage(){
-      //logic to login,logout on multiple tabs
-      window.addEventListener('storage', (event) => {
-        if (event.storageArea == localStorage) {
-          let token = localStorage.getItem('token');
-          if(token == undefined) { 
-            // you can update this as per your key
-              // DO LOGOUT FROM THIS TAB AS WELL
-              this.router.navigate(['/login']); // If you are using router
-              this.isUserLoggedIn=false;
-              
-          }
-          else{
-            this.isUserLoggedIn=true;
-            this.router.navigate(['/']);
-          }
-        }
-      }, false);
-    }
+   
 
   logout(){
   this.router.navigate(['/login']);

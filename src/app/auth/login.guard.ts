@@ -7,6 +7,9 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate, Rout
 })
 export class LoginGuard implements CanActivate {
 
+  token=localStorage.getItem('token');
+  cookie=document.cookie.indexOf('moviejwt');
+
   constructor(private router:Router){
 
   }
@@ -17,10 +20,10 @@ export class LoginGuard implements CanActivate {
   }
 
   isUserLoggedIn(){
-    if(localStorage.getItem('token')){
+    if((this.token!==undefined) || (this.cookie!==-1)){
         return true;
     }
-    else{
+    else {
       this.router.navigate(['/login']);
       return false;
     }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService}  from './auth/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,50 @@ import {AuthService}  from './auth/service/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'MovieFrontEndDemo';
+ 
+  constructor(private auth:AuthService,private router:Router){}
 
-  constructor(private auth:AuthService){}
   ngOnInit(){
-    if(document.cookie.indexOf('moviejwt')===-1)
-        {
-          this.auth.isLoggedInSubject.next(true);
-        }
+    if(localStorage.getItem('token')){
+      this.loggedIn();
+     }
+    this.checkStorage();  
+    this.checkCookie();
   }
+
+  loggedIn(){
+    this.auth.isLoggedInSubject.next(true);
+    this.router.navigate(['/']);
+  }
+
+  loggedOut(){ 
+    this.auth.isLoggedInSubject.next(false);
+    this.router.navigate(['/login']); 
+  }
+
+  //logic to login,logout on multiple tabs with cookies
+  checkCookie(){
+   
+    window.setInterval(()=>{
+      if(document.cookie.indexOf('moviejwt')===-1)
+      { 
+        this.loggedOut();
+      }
+    },300000);  
+    
+  }
+
+
+  // logic to login,logout on multiple tabs with localstorage changes
+  checkStorage(){
+
+    window.addEventListener('storage', (event) => {  
+        if(event.newValue===null ) { 
+         this.loggedOut();
+        }
+        else{   
+       this.loggedIn();
+        }
+    }, false);    
+    }
 }
