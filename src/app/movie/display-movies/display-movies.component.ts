@@ -33,4 +33,8 @@ export class DisplayMoviesComponent implements OnInit,OnChanges {
       this.router.navigate([`movies/edit/${id}`]);
   }
 
+  openDetail(id){
+  console.log("DisplayMoviesComponent -> openDetail -> id", id)
+
+  }
 }

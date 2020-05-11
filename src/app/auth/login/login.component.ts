@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
+import {SingleSignOnService}  from '../service/single-sign-on.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit,OnDestroy {
   loginForm:FormGroup;
   
   loginError:string;
-  constructor(private fb:FormBuilder,private auth:AuthService,private router:Router) { }
+  constructor(private fb:FormBuilder,private auth:AuthService,private sso:SingleSignOnService,private router:Router) { }
 
   ngOnInit() {
     console.log('Login comp initilaised');
@@ -23,16 +24,22 @@ export class LoginComponent implements OnInit,OnDestroy {
       email:['',[Validators.required]],
       password:['',[Validators.required]]
     })
+    // this.sso.getData().subscribe(
+    // (res)=>{
+    // console.log("LoginComponent -> ngOnInit -> res", res)
+    // this.router.navigate(['/']);
+    // },
+    // (err)=>{
+    // console.log("LoginComponent -> ngOnInit -> err", err)
+    // })
   }
 
   loginFormSubmit(){
    
     this.auth.login(this.loginForm.value).subscribe((res)=>{
-   // console.log("LoginComponent -> loginFormSubmit -> res", res)
     this.router.navigate(['/home']);
     },
     (err)=>{
-   // console.log("LoginComponent -> loginFormSubmit -> err", err)
     if(err.status===401){
       this.loginError='Incorrect Email or password';
     }
@@ -40,8 +47,20 @@ export class LoginComponent implements OnInit,OnDestroy {
     this.loginForm.reset();
    
   }
+
+  googleLogin(){
+    // this.sso.sendData('google signin');
+   this.auth.googleAuth().subscribe((res)=>{
+   console.log("LoginComponent -> googleLogin -> res", res)
+     
+   },
+   (err)=>{
+   console.log("LoginComponent -> googleLogin -> err", err)
+     
+   });
+  }
   ngOnDestroy(){
-    console.log('Login comp destroyed');
+    // this.sso.disconnect();
   }
 
 }

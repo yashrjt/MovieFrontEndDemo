@@ -10,6 +10,7 @@ const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'home',component:HomeComponent},
   {path:'login',component:LoginComponent},
+  {path:'google/redirect',component:HomeComponent},
   {path:'register',component:RegisterComponent},
   {path:'wishlist',component:MyWishComponent,canActivate:[LoginGuard]},
   {path:'movies',loadChildren:'./movie/movie.module#MovieModule',canActivate:[LoginGuard]}

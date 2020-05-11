@@ -25,11 +25,11 @@ export class JWTInterceptor implements HttpInterceptor{
     
     //Logic to append token to requests if token is stored in web storage
 
-        // if(token){
-        //         req=req.clone({
-        //         headers:req.headers.set('x-access-token',token),
-        //     })
-        // }
+        if(token){
+                req=req.clone({
+                headers:req.headers.set('x-access-token',token),
+            })
+        }
        
        
      return next.handle(req).pipe(

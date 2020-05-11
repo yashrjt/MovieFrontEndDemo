@@ -45,9 +45,7 @@ export class ShellMovieComponent implements OnInit {
 
  getcurrentURL(){
   this.router.events.subscribe((eve)=>{
-  console.log("ShellMovieComponent -> getcurrentURL -> eve", eve)
     if(eve instanceof NavigationEnd){
-      console.log(this.router.url);
       this.currenturl=this.router.url;
       if(this.currenturl==='/movies'){
        this.showSearch=true;
@@ -79,7 +77,6 @@ export class ShellMovieComponent implements OnInit {
         res['data'].forEach(element => {    
           if (!(this.movieList.filter(e => e.title === element['title']).length > 0) ){
             this.movieList.push({title:element['title'],movieid:element['movieid']});
-            console.log("ShellMovieComponent -> searchMovies ->  this.movieList",  this.movieList)
             
           }        
       });

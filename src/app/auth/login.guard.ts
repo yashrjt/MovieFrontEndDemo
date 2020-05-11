@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate, Router } from '@angular/router';
+import { AuthService } from './service/auth.service';
 
 
 @Injectable({
@@ -10,8 +11,13 @@ export class LoginGuard implements CanActivate {
   token=localStorage.getItem('token');
   cookie=document.cookie.indexOf('moviejwt');
 
-  constructor(private router:Router){
-
+  constructor(private router:Router,private auth:AuthService){
+      this.auth.isLoggedInObservable.subscribe((loggedIn)=>
+      {
+              if(!loggedIn){
+                return false;
+              }
+      })
   }
 
   canActivate(router:ActivatedRouteSnapshot,state:RouterStateSnapshot){
@@ -20,12 +26,17 @@ export class LoginGuard implements CanActivate {
   }
 
   isUserLoggedIn(){
-    if((this.token!==undefined) || (this.cookie!==-1)){
-        return true;
-    }
-    else {
-      this.router.navigate(['/login']);
+    
+    let loggedIn:boolean;
+    this.auth.isLoggedInObservable.subscribe((res)=>
+    {
+          loggedIn=res;  
+    })
+    if(!loggedIn){
       return false;
+    }
+    else{
+      return true;
     }
   }
 }
