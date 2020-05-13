@@ -30,5 +30,5 @@ post_build:
 artifacts:
   files:
       - '**/*'
-  base-directory: '/'
+  base-directory: 'MovieFrontEndDemo'
   discard-paths: yes
