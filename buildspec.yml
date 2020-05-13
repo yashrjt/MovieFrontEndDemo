@@ -6,6 +6,12 @@ phases:
           - npm install
           - npm install -g @angular/cli
 
+
+pre_build:
+        commands:
+        # Clear S3 bucket.
+        - aws s3 rm s3://thepassionwork.com --recursive
+        
 build:
         commands:
         # Builds Angular application. You can also build using custom environment here like mock or staging
@@ -15,14 +21,14 @@ build:
 post_build:
         commands:
         # Clear S3 bucket.
-        - aws s3 rm s3://thepassionwork.com --recursive
+        
         - echo S3 bucket is cleared.
         # Copy dist folder to S3 bucket, As of Angular 6, builds are stored inside an app folder in distribution and not at the root of the dist folder
-        - aws s3 cp dist/MovieFrontEndDemo/ s3://thepassionwork.com  --recursive
+        # aws s3 cp dist/MovieFrontEndDemo/ s3://thepassionwork.com  --recursive
         - echo Build completed on `date`
 
 artifacts:
   files:
       - '**/*'
-  base-directory: 'dist/MovieFrontEndDemo*'
+  base-directory: '/'
   discard-paths: yes
