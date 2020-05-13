@@ -21,3 +21,8 @@ post_build:
         - aws s3 cp dist/MovieFrontEndDemo/ s3://thepassionwork.com  --recursive
         - echo Build completed on `date`
 
+artifacts:
+  files:
+      - '**/*'
+  base-directory: 'dist/MovieFrontEndDemo*'
+  discard-paths: yes
