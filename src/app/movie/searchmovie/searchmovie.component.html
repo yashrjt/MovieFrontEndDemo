@@ -1,0 +1,12 @@
+<div class="search-box">
+    <form [formGroup]="searchForm">
+        <input placeholder="Search Movie" 
+        formControlName="inputSearch"
+        [typeahead]="movieList"
+        typeaheadOptionField="title"
+        [typeaheadOptionsLimit]="7"
+        [typeaheadMinLength]="0"
+        class="form-control"
+        (typeaheadOnSelect)="onSelect($event)">
+    </form>
+</div>

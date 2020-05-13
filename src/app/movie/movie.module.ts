@@ -12,9 +12,10 @@ import { StarComponent } from './star/star.component';
 import { SearchListComponent } from './search-list/search-list.component';
 
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { SearchmovieComponent } from './searchmovie/searchmovie.component';
 
 @NgModule({
-  declarations: [ShellMovieComponent, AddMovieComponent, ListMovieComponent, MoviedetailComponent, DisplayMoviesComponent, MovieComponent, StarComponent, SearchListComponent],
+  declarations: [ShellMovieComponent, AddMovieComponent, ListMovieComponent, MoviedetailComponent, DisplayMoviesComponent, MovieComponent, StarComponent, SearchListComponent, SearchmovieComponent],
   imports: [
     CommonModule,
     MovieRoutingModule,

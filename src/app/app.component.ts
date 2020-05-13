@@ -15,18 +15,22 @@ export class AppComponent implements OnInit {
     if(localStorage.getItem('token')){
       this.loggedIn();
      }
+     
+     if(document.cookie.indexOf('moviejwt')!==-1)
+      { 
+        this.loggedIn();
+      }
+
     this.checkStorage();  
     this.checkCookie();
   }
 
   loggedIn(){
     this.auth.isLoggedInSubject.next(true);
-    this.router.navigate(['/']);
   }
 
   loggedOut(){ 
     this.auth.isLoggedInSubject.next(false);
-    this.router.navigate(['/login']); 
   }
 
   //logic to login,logout on multiple tabs with cookies

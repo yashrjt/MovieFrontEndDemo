@@ -11,7 +11,7 @@ export class LoginGuard implements CanActivate {
   token=localStorage.getItem('token');
   cookie=document.cookie.indexOf('moviejwt');
 
-  constructor(private router:Router,private auth:AuthService){
+  constructor(private route:Router,private auth:AuthService){
       this.auth.isLoggedInObservable.subscribe((loggedIn)=>
       {
               if(!loggedIn){
@@ -33,7 +33,7 @@ export class LoginGuard implements CanActivate {
           loggedIn=res;  
     })
     if(!loggedIn){
-      return false;
+       this.route.navigate(['/login']);
     }
     else{
       return true;

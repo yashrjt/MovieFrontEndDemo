@@ -41,6 +41,7 @@ export class JWTInterceptor implements HttpInterceptor{
         }),
         catchError((error: HttpErrorResponse) => {
             if(error['status']===403 || error['status']===401){
+               alert('Session Expired');
                this.auth.logout();
             }
             return throwError(error);

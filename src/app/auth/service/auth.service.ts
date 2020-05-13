@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private http:HttpClient,private router:Router) { }
   //observable---stream of data
   //subject---both observable and observer  
-  isLoggedIn:boolean;
+  isLoggedIn:boolean=false;
   isLoggedInSubject:BehaviorSubject<boolean>=new BehaviorSubject(this.isLoggedIn);
   isLoggedInObservable=this.isLoggedInSubject.asObservable();
 

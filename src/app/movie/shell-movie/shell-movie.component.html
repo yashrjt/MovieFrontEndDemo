@@ -1,3 +1,6 @@
+
+
+
 <div class="flex">
     <div class="left-pane">
         <div>
@@ -6,28 +9,16 @@
         <div>
             <a routerLink='viewall'>List All Movies</a>
         </div>
+        <div>
+            <a routerLink='search'>Search Movies</a>
+        </div>
     </div>
     
-    <ng-container *ngIf="!showSearch">
+    <ng-container>
             <div class="right-pane">
                     <router-outlet></router-outlet>
                  </div>
     </ng-container>
-   <ng-container *ngIf="showSearch">
-       <form [formGroup]="searchForm">
-            <input placeholder="Search Movie" 
-            formControlName="inputSearch"
-            [typeahead]="movieList"
-            typeaheadOptionField="title"
-            [typeaheadOptionsLimit]="7"
-            [typeaheadMinLength]="0"
-            class="form-control"
-            (typeaheadOnSelect)="onSelect($event)">
-       </form>
-        <!-- <app-search-list [movies]="movieList"></app-search-list> -->
-
-      
-   </ng-container>
     
 </div>
 
