@@ -22,6 +22,6 @@ phases:
         # Copy dist folder to S3 bucket, As of Angular 6, builds are stored inside an app folder in distribution and not at the root of the dist folder
         - aws s3 cp dist/MovieFrontEndDemo/ s3://thepassionwork.com  --recursive
         - echo Build files copied complete on `date`
-        - aws cloudfront create-invalidation --distribution-id EDAY251Y1RPOU --paths "/*"
+        # aws cloudfront create-invalidation --distribution-id EDAY251Y1RPOU --paths "/*"
        
 
